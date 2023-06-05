@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,13 @@ public class AgentPatroll : MonoBehaviour
     private int destPoint = 0;
     private NavMeshAgent agent;
 
+    private const float PATROLL_SPEED = 3.5f;
+    private const float CHASE_SPEED = 7f;
+
 
     void Start()
     {
-        agent = GetComponentInChildren<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
 
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
@@ -42,9 +46,28 @@ public class AgentPatroll : MonoBehaviour
 
     void Update()
     {
+
+        if (SeePlayer())
+        {
+
+        }
+        Debug.DrawRay(transform.position + new Vector3(0,0.8f,0), transform.forward, Color.green);
         // Choose the next destination point when the agent gets
         // close to the current one.
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
             GotoNextPoint();
+
+
+        
+    }
+
+    private bool SeePlayer()
+    {
+        RaycastHit hit;
+
+        
+
+
+        return false;
     }
 }
